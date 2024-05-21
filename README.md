@@ -32,11 +32,11 @@ az account set --subscription $AZURE_SUBSCRIPTION_ID
 
 export CLUSTER_RG=management
 export CLUSTER_NAME=gru
-export LOCATION=southcentralus
+export LOCATION=westeurope
 export IDENTITY_NAME=gitops$RANDOM
 export NODE_COUNT=2
-export AZ_AKS_VERSION=1.25.6
-export AZURE_DNS_ZONE=kube101.dev
+export AZ_AKS_VERSION=1.29.4
+export AZURE_DNS_ZONE=withazure.dev
 export AZURE_DNS_ZONE_RESOURCE_GROUP=dns
 ```
 
@@ -64,7 +64,7 @@ az role assignment create --role "DNS Zone Contributor" --assignee $IDENTITY_CLI
 Create an AKS cluster with the following command:
 
 ```bash
-az aks create -k $AZ_AKS_VERSION -y -g $CLUSTER_RG \
+az aks create -k $AZ_AKS_VERSION -y -g $CLUSTER_RG --location $LOCATION\
     -s Standard_B4ms -c $NODE_COUNT \
     --assign-identity $IDENTITY --assign-kubelet-identity $IDENTITY \
     --network-plugin kubenet -n $CLUSTER_NAME

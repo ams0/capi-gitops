@@ -9,7 +9,7 @@ configs:
     application.namespaces: "*"
   repositories:
     gitops:
-      url: https://github.com/joaquinrz/capi-gitops.git
+      url: https://github.com/ams0/capi-gitops.git
       name: gitops
       type: git
 server:
@@ -18,11 +18,11 @@ server:
     ingressClassName: nginx
     annotations: 
       cert-manager.io/cluster-issuer: letsencrypt-prod
-      external-dns.alpha.kubernetes.io/hostname: argocd.kube101.dev
+      external-dns.alpha.kubernetes.io/hostname: argocd.withazure.dev
     hosts: 
-    - argocd.kube101.dev
+    - argocd.withazure.dev
     tls:
       - secretName: argocd-tls
         hosts:
-          - argocd.kube101.dev
+          - argocd.withazure.dev
     https: true
