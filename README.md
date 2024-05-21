@@ -32,7 +32,7 @@ az account set --subscription $AZURE_SUBSCRIPTION_ID
 
 export CLUSTER_RG=management
 export CLUSTER_NAME=gru
-export LOCATION=westeurope
+export LOCATION=francecentral
 export IDENTITY_NAME=gitops$RANDOM
 export NODE_COUNT=2
 export AZ_AKS_VERSION=1.29.4
