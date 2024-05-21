@@ -17,7 +17,7 @@ spec:
       project: clusters
       source:
         repoURL: 'https://charts.loft.sh/'
-        targetRevision: 0.15.0
+        targetRevision: 0.19.5
         chart: vcluster-k8s
         helm:
           values: |

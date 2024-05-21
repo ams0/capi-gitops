@@ -102,13 +102,13 @@ Edit the `gitops/management/argocd/argocd-values.yaml` with your hostname and do
 
 ```bash
 helm upgrade -i -n argocd \
-  --version 5.29.1 \
+  --version 6.10.0 \
   --create-namespace \
   --values gitops/management/argocd/argocd-values.yaml \
   argocd argo/argo-cd
 
 helm upgrade -i -n argocd \
-  --version 0.0.9\
+  --version 2.0.0\
   --create-namespace \
   --values argocd-initial-objects.yaml \
   argocd-apps argo/argocd-apps

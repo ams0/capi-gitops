@@ -15,7 +15,7 @@ spec:
     spec:
       project: workload
       source:
-        repoURL: https://github.com/joaquinrz/capi-gitops.git
+        repoURL: https://github.com/ams0/capi-gitops.git
         targetRevision: main
         path: apps/simple
       destination:
