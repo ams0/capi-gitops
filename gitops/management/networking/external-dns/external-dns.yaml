@@ -20,7 +20,7 @@ spec:
     helm:
       valueFiles:
       - $values/gitops/management/networking/external-dns/external-dns-values.yaml
-  - repoURL: https://github.com/joaquinrz/capi-gitops.git
+  - repoURL: https://github.com/ams0/capi-gitops.git
     targetRevision: main
     ref: values
   syncPolicy:

@@ -20,7 +20,7 @@ spec:
     helm:
       valueFiles:
       - $values/gitops/management/kyverno/kyverno-values.yaml
-  - repoURL: https://github.com/joaquinrz/capi-gitops.git
+  - repoURL: https://github.com/ams0/capi-gitops.git
     targetRevision: main
     ref: values
   syncPolicy:
@@ -54,7 +54,7 @@ spec:
     targetRevision: main
     directory:
       recurse: true
-    repoURL: https://github.com/joaquinrz/capi-gitops.git
+    repoURL: https://github.com/ams0/capi-gitops.git
   syncPolicy:
     automated:
       prune: true

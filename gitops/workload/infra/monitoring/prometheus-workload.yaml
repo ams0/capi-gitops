@@ -33,7 +33,7 @@ spec:
                   name: Thanos
           valueFiles:
           - $values/gitops/workload/infra/monitoring/prometheus-workload-values.yaml
-      - repoURL: https://github.com/joaquinrz/capi-gitops.git
+      - repoURL: https://github.com/ams0/capi-gitops.git
         targetRevision: main
         ref: values
       destination:

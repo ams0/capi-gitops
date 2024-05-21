@@ -76,7 +76,7 @@ spec:
     targetRevision: main
     directory:
       recurse: true
-    repoURL: https://github.com/joaquinrz/capi-gitops.git
+    repoURL: https://github.com/ams0/capi-gitops.git
   syncPolicy:
     automated:
       prune: true

@@ -15,7 +15,7 @@ spec:
     directory:
       recurse: true
       exclude: '{*values.yaml,*dashboard.yaml,*policy.yaml}'
-    repoURL: https://github.com/joaquinrz/capi-gitops
+    repoURL: https://github.com/ams0/capi-gitops
   syncPolicy:
     automated:
       prune: true
