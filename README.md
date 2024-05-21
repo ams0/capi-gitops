@@ -61,6 +61,8 @@ export DNS_ID=$(az network dns zone show --name $AZURE_DNS_ZONE \
 az role assignment create --role "DNS Zone Contributor" --assignee $IDENTITY_CLIENTID --scope $DNS_ID
 ```
 
+Finally, remember to edit the file `gitops/management/networking/external-dns/external-dns-values.yaml` with the corrent values for tenantId, subscriptionId and domain.
+
 Create an AKS cluster with the following command:
 
 ```bash
