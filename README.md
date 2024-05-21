@@ -75,7 +75,7 @@ az aks create -k $AZ_AKS_VERSION -y -g $CLUSTER_RG --location $LOCATION\
 Connect to the AKS cluster:
 
 ```bash
-az aks get-credentials --resource-group $CLUSTER_RG --name $CLUSTER_NAME
+az aks get-credentials --resource-group $CLUSTER_RG --name $CLUSTER_NAME --overwrite-existing
 ```
 
 Verify that you can connect to the AKS cluster:
@@ -108,7 +108,7 @@ helm upgrade -i -n argocd \
   argocd argo/argo-cd
 
 helm upgrade -i -n argocd \
-  --version 2.0.0\
+  --version 2.0.0 \
   --create-namespace \
   --values argocd-initial-objects.yaml \
   argocd-apps argo/argocd-apps
