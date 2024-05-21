@@ -29,6 +29,7 @@ To create a new management cluster in AKS, run the following commands. Otherwise
 ```bash
 export AZURE_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
 az account set --subscription $AZURE_SUBSCRIPTION_ID
+export AZURE_TENANT_ID=$(az account show --query tenantId -o tsv)
 
 export CLUSTER_RG=management
 export CLUSTER_NAME=gru
