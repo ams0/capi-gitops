@@ -1,0 +1,16 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+kind: VCluster
+metadata:
+  name: {{ .Values.cluster.name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  controlPlaneEndpoint:
+    host: ""
+    port: 0
+  helmRelease:
+    chart:
+      name: null
+      repo: null
+      version: null
+    values: ""
+  kubernetesVersion: 1.29.2

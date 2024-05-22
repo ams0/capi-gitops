@@ -17,3 +17,6 @@ clusterctl init --infrastructure azure
 sleep 30
 # Create and apply an AzureClusterIdentity
 envsubst < manifests/templates/aks-cluster-identity.yaml | kubectl apply -f -
+
+# Deploy vcluster CAPI provider
+clusterctl init --infrastructure vcluster
