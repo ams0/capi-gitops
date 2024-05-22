@@ -34,6 +34,7 @@ ingress:
   ingressClassName: nginx
   annotations:
     external-dns.alpha.kubernetes.io/hostname: dash.withazure.dev
+    external-dns.alpha.kubernetes.io/ttl: "30"
     cert-manager.io/cluster-issuer: letsencrypt-prod
   hosts:
     - dash.withazure.dev

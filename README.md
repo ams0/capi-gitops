@@ -129,6 +129,8 @@ Access the ArgoCD web UI by running the following command, and then open the URL
 
 ```bash
 open https://argocd.$AZURE_DNS_ZONE
+open https://dash.$AZURE_DNS_ZONE
+
 ```
 
 > **_NOTE:_** ArgoCD is in read-only mode for anonymous users, that should be enough to monitor the installaation progress, but if you want to change things, retrieve the secret with: 

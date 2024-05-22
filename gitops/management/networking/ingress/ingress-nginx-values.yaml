@@ -5,3 +5,4 @@ controller:
     annotations:
       service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
       external-dns.alpha.kubernetes.io/hostname: management.withazure.dev
+      external-dns.alpha.kubernetes.io/ttl: "30"

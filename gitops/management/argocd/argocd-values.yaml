@@ -21,6 +21,7 @@ server:
     annotations: 
       cert-manager.io/cluster-issuer: letsencrypt-prod
       external-dns.alpha.kubernetes.io/hostname: argocd.withazure.dev
+      external-dns.alpha.kubernetes.io/ttl: "30"
     hosts: 
     - argocd.withazure.dev
     tls:
