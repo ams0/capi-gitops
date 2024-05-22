@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: infra
   sources:
-  - repoURL: 'https://dntosas.github.io/capi2argo-cluster'
+  - repoURL: 'https://dntosas.github.io/capi2argo-cluster-operator/'
     targetRevision: 0.2.1
     chart: capi2argo-cluster-operator
   syncPolicy:
