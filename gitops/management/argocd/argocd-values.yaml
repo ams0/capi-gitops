@@ -1,3 +1,5 @@
+global:
+  domain: argocd.withazure.dev
 configs:
   rbac:
     policy.default: 'role:readonly'
