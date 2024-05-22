@@ -23,6 +23,13 @@ spec:
   - repoURL: https://github.com/ams0/capi-gitops.git
     targetRevision: main
     ref: values
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      name: cert-manager-webhook
+      jqPathExpressions:
+        - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "control-plane")
+        - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "kubernetes.azure.com/managedby")
   syncPolicy:
     automated:
       prune: true
