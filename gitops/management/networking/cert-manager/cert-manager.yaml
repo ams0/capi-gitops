@@ -23,6 +23,7 @@ spec:
   - repoURL: https://github.com/ams0/capi-gitops.git
     targetRevision: main
     ref: values
+#https://github.com/cert-manager/cert-manager/issues/4114
   ignoreDifferences:
     - group: admissionregistration.k8s.io
       kind: ValidatingWebhookConfiguration
