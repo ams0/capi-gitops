@@ -13,76 +13,18 @@ This repository demonstrates how open-source tools, such as ClusterAPI, ArgoCD, 
 
 ## Prerequisites
 
-For our sample will be using Azure Kubernetes Service (AKS). Before starting, you will need the following:
+This branch works with a kind cluster, to keep the cost low while experimenting. I use kind with MetalLB and Cilium, to have also working Loadbalancer type of services; I have a handy script on [gist](https://gist.github.com/ams0/4f1063be9e8d5c34fc85a1b4857aed71) that will help you.
 
-- An Azure account (already logged in with the Azure CLI)
-- Azure CLI [download](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 - [Helm CLI](https://helm.sh) and `envsubst`
-- Optional but recommented (and the instructions below assume you have one) A working DNS zone in Azure, to use proper DNS names and automatic certifcates provisioning with Let'sEncrypt
 
 Everything else is installed via ArgoCD, so no need for any extra CLI!
 
-## Step 1: Create an ArgoCD management cluster with AKS
-
-To create a new management cluster in AKS, run the following commands. Otherwise, if you already have an existing AKS cluster, you can skip this step and proceed to connecting to the existing AKS cluster. Change accoring to your liking, specially the `AZURE_DNS_ZONE`:
+## Step 1: Create an ArgoCD management cluster with kind
 
 ```bash
-export AZURE_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
-az account set --subscription $AZURE_SUBSCRIPTION_ID
-export AZURE_TENANT_ID=$(az account show --query tenantId -o tsv)
-
-export CLUSTER_RG=management
-export CLUSTER_NAME=gru
-export LOCATION=francecentral
-export IDENTITY_NAME=gitops$RANDOM
-export NODE_COUNT=2
-export AZ_AKS_VERSION=1.29.4
-export AZURE_DNS_ZONE=withazure.dev
-export AZURE_DNS_ZONE_RESOURCE_GROUP=dns
+kind_cilium.sh -k v1.30.0 -n capi -i ghcr.io/fluxcd/kindest/node
 ```
 
-Create a resource group for your AKS cluster with the following command, replacing <resource-group> with a name for your resource group and <location> with the Azure region where you want your resources to be located:
-
-```bash
-az group create --name $CLUSTER_RG --location $LOCATION
-```
-
-To use automatic DNS name updates via external-dns, we need to create a new managed identity and assign the role of DNS Contributor to the resource group containg the zone resource  
-
-```bash
-export IDENTITY=$(az identity create  -n $IDENTITY_NAME -g $CLUSTER_RG --query id -o tsv)
-export IDENTITY_CLIENTID=$(az identity show -g $CLUSTER_RG -n $IDENTITY_NAME -o tsv --query clientId)
-
-echo "Sleeping a bit (35 seconds) to let AAD catch up..."
-sleep 35
-
-export DNS_ID=$(az network dns zone show --name $AZURE_DNS_ZONE \
-  --resource-group $AZURE_DNS_ZONE_RESOURCE_GROUP --query "id" --output tsv)
-
-az role assignment create --role "DNS Zone Contributor" --assignee $IDENTITY_CLIENTID --scope $DNS_ID
-```
-
-Finally, remember to edit the file `gitops/management/networking/external-dns/external-dns-values.yaml` with the corrent values for tenantId, subscriptionId and domain.
-
-Create an AKS cluster with the following command:
-
-```bash
-az aks create -k $AZ_AKS_VERSION -y -g $CLUSTER_RG --location $LOCATION\
-    -s Standard_B4ms -c $NODE_COUNT \
-    --assign-identity $IDENTITY --assign-kubelet-identity $IDENTITY \
-    --network-plugin kubenet -n $CLUSTER_NAME
-```
-
-Connect to the AKS cluster:
-
-```bash
-az aks get-credentials --resource-group $CLUSTER_RG --name $CLUSTER_NAME --overwrite-existing
-```
-
-Verify that you can connect to the AKS cluster:
-```bash
-kubectl get nodes
-```
 
 ## Step 2:  Install ArgoCD
 
@@ -99,13 +41,13 @@ helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 ```
 
-Edit the `gitops/management/argocd/argocd-values.yaml` with your hostname and domain name for ArgoCD ingress, then install ArgoCD:
+Edit the `gitops/management/argocd/argocd-kind-values.yaml` with your hostname and domain name for ArgoCD ingress, then install ArgoCD:
 
 ```bash
 helm upgrade -i -n argocd \
-  --version 6.10.0 \
+  --version 6.10.2 \
   --create-namespace \
-  --values gitops/management/argocd/argocd-values.yaml \
+  --values gitops/management/argocd/argocd-kind-values.yaml \
   argocd argo/argo-cd
 ```
 

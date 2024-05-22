@@ -7,10 +7,10 @@ spec:
   controlPlaneEndpoint:
     host: ""
     port: 0
+  {{- if .Values.cluster.helmRelease }}
   helmRelease:
-    chart:
-      name: null
-      repo: null
-      version: null
-    values: ""
-  kubernetesVersion: 1.29.2
+  {{- .Values.cluster.helmRelease | toYaml | nindent 4  -}}
+  {{ end }}
+  {{if  .Values.cluster.kubernetes_version  }}
+  kubernetesVersion: {{ .Values.cluster.kubernetes_version | quote }}
+  {{ end }}

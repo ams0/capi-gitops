@@ -1,0 +1,22 @@
+global:
+  domain: argocd.cluster.local
+configs:
+  rbac:
+    policy.default: 'role:readonly'
+  cm:
+    users.anonymous.enabled: "true"
+    timeout.reconciliation: 10s
+  params:
+    server.insecure: true
+    application.namespaces: "*"
+  repositories:
+    gitops:
+      url: https://github.com/ams0/capi-gitops.git
+      name: gitops
+      type: git
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts: 
+    - argocd.cluster.local

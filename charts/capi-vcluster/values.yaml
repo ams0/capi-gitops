@@ -1,3 +1,35 @@
 cluster:
+  # -- The name of the cluster
   name: capi-vcluster
-  kubernetes_version: v1.30.1-rc1-k3s1
+  # -- Kubernetes version that should be used in this vcluster instance, e.g. "1.23".
+  # -- The patch number from the version will be ignored, and the latest supported one
+  # -- by the used chart will be installed.
+  # -- Versions out of the supported range will be ignored, and earliest/latest supported
+  # -- version will be used instead.
+  kubernetes_version: null
+  # -- helmRelease field is used to specify the Helm chart that should be used to install
+  helmRelease: {}
+
+    # The values field must contain a string with contents that would make a valid YAML file.
+    # Please refer to vcluster documentation for the extensive explanation of the features,
+    # and the appropriate Helm values that need to be set for your use case - https://www.vcluster.com/docs
+    # values: |-
+    #   # example:
+    #   # syncer:
+    #   #   extraArgs:
+    #   #   - --tls-san=myvcluster.mydns.abc
+
+    # chart: 
+    #   # By default, the "https://charts.loft.sh" repo is used
+    #   repo: ${CHART_REPO:=null}
+    #   # By default, the "vcluster" chart is used. This coresponds to the "k3s" distro of the
+    #   # vcluster, and the "/charts/k3s" folder in the vcluster GitHub repo.
+    #   # Other available options currently are: "vcluster-k8s", "vcluster-k0s" and "vcluster-eks".
+    #   name: ${CHART_NAME:=null}
+    #   # By default, a particular vcluster version is used in a given CAPVC release. You may find
+    #   # it out from the source code, e.g.: 
+    #   # https://github.com/loft-sh/cluster-api-provider-vcluster/blob/v0.1.3/pkg/constants/constants.go#L7
+    #   #
+    #   # Please refer to the vcluster Releases page for the list of the available versions:
+    #   # https://github.com/loft-sh/vcluster/releases
+    #   version: ${CHART_VERSION:=null}
