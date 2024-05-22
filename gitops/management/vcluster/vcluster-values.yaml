@@ -1,6 +1,0 @@
-syncer:
-  extraArgs:
-  - --tls-san=w2.vcluster.withazure.dev
-sync:
-  ingresses:
-    enabled: true

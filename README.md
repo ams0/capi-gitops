@@ -107,7 +107,11 @@ helm upgrade -i -n argocd \
   --create-namespace \
   --values gitops/management/argocd/argocd-values.yaml \
   argocd argo/argo-cd
+```
 
+Next, we'll use the [argocd-apps](https://artifacthub.io/packages/helm/argo/argocd-apps) Helm chart to deploy the initial objects (the `infra` AppProject and the app-of-apps Application pointing to `gitops/management` folder in this repo):
+
+```bash
 helm upgrade -i -n argocd \
   --version 2.0.0 \
   --create-namespace \
