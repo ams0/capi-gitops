@@ -1,8 +1,8 @@
 name: worker
-location: southcentralus
+location: francecentral
 clusterResourceGroupName: worker
 subscriptionId:
-k8sVersion: v1.24.10
+k8sVersion: v1.29.4
 sshPublicKey: ""
 controlAgentPoolNodes: 2
 controlAgentPoolNodeSize: Standard_D2s_v5
