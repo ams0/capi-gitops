@@ -7,7 +7,7 @@ metadata:
 spec:
   destination:
     namespace: argocd
-    server: https://kubernetes.default.svc
+    server: '*'
   project: infra
   source:
     path: gitops/workload/infra
