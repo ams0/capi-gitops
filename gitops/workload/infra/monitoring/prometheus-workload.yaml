@@ -18,7 +18,7 @@ spec:
       project: workload-infra
       sources:
       - repoURL: 'https://prometheus-community.github.io/helm-charts/'
-        targetRevision: "58.6.0"
+        targetRevision: "45.10.1"
         chart: kube-prometheus-stack
         helm:
           values: |
@@ -29,15 +29,15 @@ spec:
                   region: westeurope
                   cluster: {{name}}
                 remoteWrite:
-                - url: "http://receive.thanos.withazure.dev/api/v1/receive"
+                - url: "http://receive.thanos.kube101.dev/api/v1/receive"
                   name: Thanos
           valueFiles:
           - $values/gitops/workload/infra/monitoring/prometheus-workload-values.yaml
-      - repoURL: https://github.com/ams0/capi-gitops.git
+      - repoURL: https://github.com/joaquinrz/capi-gitops.git
         targetRevision: main
         ref: values
       destination:
-        server: 'in-cluster'
+        server: '{{server}}'
         namespace: prometheus
       syncPolicy:
         automated:
