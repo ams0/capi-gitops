@@ -1,5 +1,5 @@
 global:
-  domain: argocd.withazure.dev
+  domain: argocd.kubeis.fun
 configs:
   rbac:
     policy.default: 'role:readonly'
@@ -20,12 +20,12 @@ server:
     ingressClassName: nginx
     annotations: 
       cert-manager.io/cluster-issuer: letsencrypt-prod
-      external-dns.alpha.kubernetes.io/hostname: argocd.withazure.dev
+      external-dns.alpha.kubernetes.io/hostname: argocd.kubeis.fun
       external-dns.alpha.kubernetes.io/ttl: "30"
     hosts: 
-    - argocd.withazure.dev
+    - argocd.kubeis.fun
     tls:
       - secretName: argocd-tls
         hosts:
-          - argocd.withazure.dev
+          - argocd.kubeis.fun
     https: true
