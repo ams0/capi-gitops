@@ -37,7 +37,7 @@ spec:
         targetRevision: main
         ref: values
       destination:
-        server: '{{server}}'
+        server: 'in-cluster'
         namespace: prometheus
       syncPolicy:
         automated:

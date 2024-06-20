@@ -80,11 +80,24 @@ az aks get-credentials --resource-group $CLUSTER_RG --name $CLUSTER_NAME --overw
 ```
 
 Verify that you can connect to the AKS cluster:
+
 ```bash
 kubectl get nodes
 ```
+## Step 3:  Bootstrap Management Cluster with ClusterAPI
 
-## Step 2:  Install ArgoCD
+To initialize the AKS cluster with Cluster API and turn it into the management cluster, follow these instructions. Once initialized, the management cluster will allow you to control and maintain a fleet of ephemeral clusters. Unfortunately this part cannot be automated via ArgoCD just yet, although a promising effort is made in the `capi-operator` [repository](https://github.com/kubernetes-sigs/cluster-api-operator/tree/main):
+
+```bash
+# Run the script, passing the namespace as a parameter (the Azure Managed Identity for the workload clusters)
+
+./capz-init.sh 
+
+# Check the providers
+kubectl get providers.clusterctl.cluster.x-k8s.io -A
+```
+
+## Step 3:  Install ArgoCD
 
 ArgoCD is an open-source continuous delivery tool designed to simplify the deployment of applications to Kubernetes clusters. It allows developers to manage and deploy applications declaratively, reducing the amount of manual work involved in the process. With ArgoCD, developers can automate application deployment, configuration management, and application rollouts, making it easier to deliver applications reliably to production environments.
 
@@ -136,19 +149,6 @@ open https://dash.$AZURE_DNS_ZONE
 > **_NOTE:_** ArgoCD is in read-only mode for anonymous users, that should be enough to monitor the installaation progress, but if you want to change things, retrieve the secret with: 
 > `kubectl get secret -n argocd argocd-initial-admin-secret  -o=jsonpath='{.data.password}'| base64 -D`
 
-## Step 3:  Bootstrap Management Cluster with ClusterAPI
-
-To initialize the AKS cluster with Cluster API and turn it into the management cluster, follow these instructions. Once initialized, the management cluster will allow you to control and maintain a fleet of ephemeral clusters. Unfortunately this part cannot be automated via ArgoCD just yet, although a promising effort is made in the `capi-operator` [repository](https://github.com/kubernetes-sigs/cluster-api-operator/tree/main):
-
-```bash
-# Run the script, passing the namespace as a parameter (the Azure Managed Identity for the workload clusters)
-
-./capz-init.sh 
-
-# Check the providers
-kubectl get providers.clusterctl.cluster.x-k8s.io -A
-```
-
 ## Step 4:  Deploy clusters via Pull Requests
 
 Open a PR against your main branch, modifying the appset-capz.yaml or appset-vcluster.yaml to deploy your ephemeral clusters!
@@ -167,4 +167,3 @@ Delete the identity:
 ```bash
 az identity delete --id $IDENTITY
 ```
-
