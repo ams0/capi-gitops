@@ -1,4 +1,4 @@
-# Ephemeral Clusters as a Service with vcluster, ClusterAPI and ArgoCD
+# Ephemeral Clusters as a Service with AKS/vcluster, ClusterAPI and ArgoCD
 
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
