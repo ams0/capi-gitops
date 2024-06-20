@@ -37,7 +37,7 @@ export LOCATION=francecentral
 export IDENTITY_NAME=gitops$RANDOM
 export NODE_COUNT=2
 export AZ_AKS_VERSION=1.29.4
-export AZURE_DNS_ZONE=withazure.dev
+export AZURE_DNS_ZONE=kubeis.fun
 export AZURE_DNS_ZONE_RESOURCE_GROUP=dns
 ```
 
