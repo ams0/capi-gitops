@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: argocd
     server: 'aks*'
-  project: infra
+  project: workload-infra
   source:
     path: gitops/workload/infra
     targetRevision: main
